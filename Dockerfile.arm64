@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/nightly/sdk:8.0-alpine-aot AS build
+
+RUN apk add clang build-base zlib-dev
+
+WORKDIR /src
+
+COPY ["src/rinha/rinha.csproj", "src/rinha/"]
+RUN dotnet restore -r linux-musl-arm64 "src/rinha/rinha.csproj"
+
+COPY . .
+WORKDIR "/src/src/rinha"
+
+RUN dotnet restore -r linux-musl-arm64
+
+RUN dotnet publish --no-restore -o /app rinha.csproj
+
+RUN rm /app/*.dbg /app/*.Development.json
+
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-alpine-aot
+
+WORKDIR /app
+COPY --from=build /app .
+RUN ls -la
+ENTRYPOINT ["./rinha"]

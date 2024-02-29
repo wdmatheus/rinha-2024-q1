@@ -1,0 +1,12 @@
+**/*.blob
+**/dist/
+**/x64/
+**/x86/
+**/.vscode/
+**/.rider/
+**/build/
+**/bld/
+**/bin/
+**/obj/
+**/node_modules/
+**/.git/
