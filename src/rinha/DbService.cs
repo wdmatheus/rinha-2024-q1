@@ -60,6 +60,7 @@ public sealed class DbService
    
     private const string ObterExtratoQuery =
         """
+         refresh materialized view concurrently vw_extrato;
          select
              *
          from
