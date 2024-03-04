@@ -52,7 +52,7 @@ public sealed class DbService
         string? extrato = null;
         while (await reader.ReadAsync(ct))
         {
-            extrato = reader.GetString(1);
+            extrato = reader.GetString(0);
         }
         await reader.CloseAsync();
         return extrato;
@@ -60,9 +60,9 @@ public sealed class DbService
    
     private const string ObterExtratoQuery =
         """
-         refresh materialized view concurrently vw_extrato;
+         refresh materialized view concurrently public.vw_extrato;
          select
-             *
+             c.extrato
          from
          	public.vw_extrato c
          where

@@ -161,7 +161,7 @@ from
 
     ) j
 with data;
-create unique index if not exists ix_vw_extrato_id on vw_extrato (id);
+create unique index if not exists ix_vw_extrato_id on public.vw_extrato (id);
 
 -------------------------- carga inicial --------------------------
 DO $$
@@ -173,7 +173,7 @@ values
     (3, 'les cruders', 0, 1000000),
     (4, 'padaria joia de cocaia', 0, 10000000),
     (5, 'kid mais', 0, 500000);
-    refresh materialized view concurrently vw_extrato;
+    refresh materialized view concurrently public.vw_extrato;
 end; $$
 
 
