@@ -173,7 +173,7 @@ values
     (3, 'les cruders', 0, 1000000),
     (4, 'padaria joia de cocaia', 0, 10000000),
     (5, 'kid mais', 0, 500000);
-    refresh materialized view concurrently public.vw_extrato;
+    refresh materialized view public.vw_extrato;
 end; $$
 
 
